@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<script>
+			var item =[ 
+							{"name":"apple", "price":"200",  "qty":"5"},
+							{"name":"mango", "price":"400",  "qty":"5"},
+							{"name":"orange", "price":"500",  "qty":"5"},
+							{"name":"milk", "price":"120",  "qty":"3"}
+					 ];
+				 function showitem()
+				 
+				 {
+					var data = "";
+					for( var i=0; i<item.length; i++)
+					{
+						var name =  item[i].name ;
+						var price = item[i].price ;
+						var qty = item[i].qty ;
+						
+						
+						data = data + "<tr>";
+						data = data + "<td>" +name+ "</td>";
+						data = data + "<td>" +price+ "</td>";
+						data = data + "<td>" +qty+ "</td>";
+						
+					data = data + "<td><a href='#'onclick='delitem("+i+")'>Delete</a> </td>";
+						
+					    data = data + "</tr>";
+						
+					}
+			var tableopen = "<table align='center' cellpadding='5'>";
+			var tableclose ="</table>";
+			var thead ="<tr> <th>Item Name</th> <th>Item price</th><th>Item Quantity</th><th>delete</th></tr>";
+			var alldata =tableopen + thead + data + tableclose;
+			document.getElementById("pagedata").innerHTML=alldata;
+				 }
+				 function save()
+				 {
+					var n = document.getElementById("name").value;
+					var p = document.getElementById("price").value;
+					var q = document.getElementById("qty").value;
+					var newitem = {"name":n,  "price":p, "qty":q};
+					item = item.concat(newitem); //Adding inside existing array
+					showitem();
+				 }
+				 function clearbox()
+				 {
+					document.getElementById("name").value="";
+					document.getElementById("price").value="";
+					document.getElementById("qty").value="";
+				 }
+				 function delitem(index)
+				 {
+					item.splice(index,1);
+					showitem();
+				 }
+				 
+		</script>
+	</head>
+	<body>
+	<br/>
+		<center>
+			<button  onclick="showitem()">show array</button>
+		</center>
+	<br/><br/>
+		<center>
+			
+			<input type="text" id="name" placeholder="enter Name">
+			<input type="text" id="price" placeholder="enter price">
+			<input type="text" id="qty" placeholder="enter quantity">
+			<button  onclick="save()">save Item</button>
+		</center>
+		<br/>
+		<div id="pagedata"></div>
+	</body>
+
+</html>
